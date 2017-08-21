@@ -1,0 +1,16 @@
+mixin storeCard(store={})
+    .store
+        .store__hero
+            .store__actions
+                .store__action.store__action--edit
+                    a(href=`/stores/${store._id}/edit`)
+                        //- This gives us the pencil icon using the helper.js. Takes us to the edit page
+                        != h.icon('pencil')  
+            //- either the photo that the store uploaded or the default
+            img(src=`/uploads/${store.photo ||'store.png'}`, alt="Stores Photo")  
+            //- The Name of the store with a link using its slug
+            h2.title
+                a(href=`/store/${store.slug}`) #{store.name}
+                //- Splits all the words up into a string, then slices them to get words 1-20, then joins them back
+        p= store.description.split(' ').slice(0, 20).join(' ')
+            

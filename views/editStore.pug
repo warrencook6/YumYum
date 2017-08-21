@@ -1,0 +1,11 @@
+extends layout
+
+//- import mixins
+include mixins/storeForm
+
+
+block content
+    div.inner
+       h1= title 
+       +storeForm(store)
+//- pass store  into store form so that we cna autofill fields with the store info

@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/storeCard
+
+block content
+    .inner
+        h1= title
+            //- Repeates all stores using the mixin template we made
+        .stores  
+            each store in stores
+                +storeCard(store)
