@@ -6,10 +6,12 @@ Just you wait folks!
 
 To load sample data, run the following command in your terminal:
 
+Install Dependancies 
 ```bash
 npm install --save
 ```
 
+Start er up!
 ```bash
 npm start
 ```
