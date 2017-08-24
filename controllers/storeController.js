@@ -94,6 +94,18 @@ exports.updateStore = async (req, res) => {
   // Redriect them the store and tell them it worked
 };
 
-exports.getStoreBySlug = async function (req, res) {
-  const store = await Store.findOne({})
+exports.getStoreBySlug = async function (req, res, next) {
+  // querry DB
+  const store = await Store.findOne({slug: req.params.slug});
+  if(!store) return next();
+  res.render('store', {store, title: store.name})
+}
+
+exports.getStoresByTag = async function(req,res){
+  const tag = req.params.tag;
+  const tagQuery = tag || {$exists: true}; // If no tag is selected, show any store that has any tag
+  const tagsPromise =  Store.getTagsList(); //Used to get us an array of tags (id of store and the count)
+  const storesPromise = Store.find({ tags: tagQuery}); // Used to get us all the stores that have that tag
+  const [tags, stores] = await Promise.all([tagsPromise, storesPromise]); // Returns us the array
+  res.render('tag', {title: 'tags', tags, tag, stores})
 }
